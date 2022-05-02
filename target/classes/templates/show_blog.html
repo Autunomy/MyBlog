@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head  th:include="commons/cdn :: cdn">
+    <meta charset="UTF-8">
+    <title th:text="${blog.getBlog_name()}"></title>
+</head>
+<body>
+    <!--导航栏-->
+    <div th:replace="commons/nav :: nav"></div>
+
+    <!--主体部分-->
+    <div class="col-md-8 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-offset-2">
+                <h1 class="text-center" th:text="${blog.getBlog_name()}"></h1>
+                <div>
+                    <div style="float: left;">
+                        <!--作者信息-->
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;<span th:text="${blog.getBlog_author()}"></span> &nbsp;&nbsp;
+                        <!--时间信息-->
+                        <span class="glyphicon glyphicon-time"></span>&nbsp;<span th:text="${#dates.format(blog.getBlog_date(),'yyyy-MM-dd')}"></span>
+                    </div>
+                    <div style="float: right;">
+                        <span class="glyphicon glyphicon-heart"></span> <span th:text="${blog.getBlog_watch_num()}"></span>
+                        &nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-eye-open"></span> <span th:text="${blog.getBlog_heart_num()}"></span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <!--文章内容-->
+                <div  id="test-editormd">
+                    <!--内容显示区域-->
+                    <textarea style="display:none;" placeholder="markdown语言" th:text="${blog.getBlog_content()}"></textarea>
+                </div>
+
+                <br>
+                <br>
+                <!--点赞区域-->
+                <div style="text-align: center">
+                    <!--点赞按钮-->
+                    <a href="">
+                        <!--点赞量显示-->
+                        <span class="glyphicon glyphicon-heart" style="font-size: x-large">
+                            <span th:text="${blog.getBlog_heart_num()}"></span>
+                        </span>
+                    </a>
+                </div>
+                <br>
+                <br>
+                <br>
+
+                <!--评论部分-->
+                <div>
+                    <!--写评论-->
+                    <form role="form" th:action="@{/blog/addComment}" method="post">
+                        <input type="hidden" name="blog_id" th:value="${blog.getBlog_id()}">
+                        用户名：<input type="text" name="comment_author">
+                        <br>
+                        <br>
+                        <input type="text" class="form-control" rows="3" name="comment_content"/>
+                        <br>
+                        <br>
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary" value="提交" id="comment">评论</button>
+                        </div>
+                    </form>
+                    <!--显示评论-->
+                    <table border="0">
+                        <thead style="font-size: x-large">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: large">
+                            <div th:each="comment,commentStart : ${comments}">
+                                <!--楼号-->
+                                <tr>
+                                    <td colspan="3" th:text="${commentStart.count}+'楼:'"></td>
+                                </tr>
+                                <!--评论内容-->
+                                <tr>
+                                    <td colspan="3" th:text="${comment.getComment_content()}">评论1</td>
+                                </tr>
+                                <!--用户信息以及时间-->
+                                <tr>
+                                    <td><a style="color: darkred" th:utext="${comment.getComment_author()}"></a></td>
+                                    <td colspan="2" th:utext="'&nbsp;&nbsp;'+${#dates.format(comment.getComment_time(),'yyyy-MM-dd')}">2020-2-2</td>
+                                </tr>
+
+                                <!--占位-->
+                                <tr>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--目录栏  技术有限，过后制作-->
+    <div class="col-md-3" >
+        <!--调整位置进行换行-->
+        <br>
+        <br>
+        <br>
+
+        <h1 style="background-color: deepskyblue">目录部分</h1>
+    </div>
+
+    <!--页面底部信息-->
+    <div th:replace="commons/footer :: footer"></div>
+
+
+    <script th:src="@{/static/editormd/examples/js/jquery.min.js}"></script>
+    <script th:src="@{/static/editormd/examples/js/jquery.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/marked.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/prettify.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/raphael.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/underscore.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/sequence-diagram.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/flowchart.min.js}"></script>
+    <script th:src="@{/static/editormd/lib/jquery.flowchart.min.js}"></script>
+    <script th:src="@{/static/editormd/editormd.js}"></script>
+    <script>
+        $(function () {
+            editormd.markdownToHTML("test-editormd", {
+                htmlDecode      : "style,script,iframe",
+                emoji           : true,
+                taskList        : true,
+                tex             : true,  // 默认不解析
+                flowChart       : true,  // 默认不解析
+                sequenceDiagram : true  // 默认不解析
+            });
+        });
+    </script>
+
+</body>
+</html>

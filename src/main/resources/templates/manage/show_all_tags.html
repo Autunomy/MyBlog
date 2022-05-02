@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/cdn :: cdn">
+    <meta charset="UTF-8">
+    <title>查看所有分类</title>
+</head>
+<body>
+<!--导航栏-->
+<nav th:replace="manage/commons/nav :: nav"></nav>
+
+<!--主体-->
+<div class="container">
+    <h2 class="text-center">全部博客分类</h2>
+    <table class="table table-bordered">
+        <thead style="font-size: x-large">
+        <tr>
+            <th>分类id</th>
+            <th>分类名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody style="font-size: x-large">
+        <tr th:each="tag : ${tags}">
+            <td th:text="${tag.getTag_id()}"></td>
+            <td th:text="${tag.getTag_name()}"></td>
+            <td>
+                <!--修改后跳转到添加标签页面，自动填写标签名-->
+                <a class="btn btn-primary" th:href="@{/manage/toUpdateTag/}+${tag.getTag_id()}">修改</a>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <a class="btn btn-danger" th:href="@{/manage/deleteTag/}+${tag.getTag_id()}">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--页面底部信息-->
+<div th:replace="commons/footer :: footer"></div>
+</body>
+</html>

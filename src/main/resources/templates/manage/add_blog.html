@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<head  th:include="commons/cdn :: cdn">-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <title>添加博文</title>
+    <link rel="stylesheet" th:href="@{/static/editormd/css/editormd.css}"/>
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.0.min.js"></script>
+</head>
+<body>
+<nav th:replace="~{manage/commons/nav :: nav}"></nav>
+
+<div class="container">
+    <!--主体部分-->
+    <form role="form" th:action="@{/manage/addBlog}" method="post">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="form-group">
+                <label>请输入标题<sup style="color: red">*</sup></label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="form-group">
+                <label>选择分类<sup style="color: red">*</sup></label>
+                <select class="form-control" name="tag">
+                    <div th:each="tag : ${tags}">
+                        <option th:text="${tag.getTag_name()}"></option>
+                    </div>
+                </select>
+
+                <br>
+
+                <!--跳转到博客分类管理页面-->
+                <a >没有想要的分类?</a>
+            </div>
+
+            <!--文件上传区域-->
+<!--            <div class="form-group">-->
+<!--                <label>请选择需要上传的文件<sup style="color: red">*</sup></label>-->
+<!--                <input type="file" name="blog">-->
+<!--            </div>-->
+        </div>
+
+        <!--markdown编辑区-->
+        <div id="editor">
+            <textarea name="text" id="content" style="display:none;"></textarea>
+        </div>
+
+        <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary" value="提交" id="sub">提交</button>
+        </div>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+</div>
+
+<script th:src="@{/static/editormd/examples/js/jquery.min.js}"></script>
+<script th:src="@{/static/editormd/editormd.js}"></script>
+<script>
+    $(function () {
+        editormd("editor", {
+            width: "100%",
+            height: 800,
+            // syncScrolling: "single",
+            path: "/editormd/lib/",//必须有  指定了外部css依赖
+            saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
+            emoji: true,
+            // theme: "dark",//工具栏主题
+            // previewTheme: "dark",//预览主题
+            // editorTheme: "pastel-on-dark",//编辑主题
+            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart: true,             // 开启流程图支持，默认关闭
+            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+            //图片上传
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/manage/blogpic",
+            onload: function () {
+                console.log('onload', this);
+            },
+            /*指定需要显示的功能按钮*/
+            toolbarIcons: function () {
+                return ["undo", "redo", "|",
+                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                    "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "link", "image", "code", "preformatted-text",
+                    "code-block", "table", "datetime", "|",
+                    "watch", "preview", "clear"]
+            },
+        });
+    });
+</script>
+</body>
+</html>

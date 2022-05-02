@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hty.mapper.CommentMapper">
+    <select id="queryCommentByName" resultType="comment">
+        select * from comment where comment_author=#{comment_author};
+    </select>
+
+    <select id="queryAllComment" resultType="comment">
+        select * from comment;
+    </select>
+
+    <select id="queryCommentByAuthor" resultType="comment">
+        select * from comment where comment_author=#{comment_author};
+    </select>
+
+    <select id="queryCommentByBlog" resultType="comment">
+        select * from comment where comment_blog=#{comment_blog};
+    </select>
+
+    <insert id="addComment">
+        insert into comment
+            value(#{comment_id},#{comment_author},#{comment_content},#{comment_time},#{comment_blog});
+    </insert>
+
+    <delete id="deleteCommentByAuthor">
+        delete from comment where comment_id=#{comment_id};
+    </delete>
+</mapper>

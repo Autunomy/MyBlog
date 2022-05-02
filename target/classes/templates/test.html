@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <title>后台管理测试</title>
+    <link rel="stylesheet" th:href="@{/static/editormd/css/editormd.css}"/>
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+<div id="article-content">
+    <textarea name="text" id="content" style="display:none;" > </textarea>
+</div>
+
+<div style="margin-left: 100px" id="test-editormd">
+　　　　<textarea style="display:none;" placeholder="markdown语言">#Editor.md</textarea>
+</div>
+<script th:src="@{/static/editormd/examples/js/jquery.min.js}"></script>
+<script th:src="@{/static/editormd/examples/js/jquery.min.js}"></script>
+<script th:src="@{/static/editormd/lib/marked.min.js}"></script>
+<script th:src="@{/static/editormd/lib/prettify.min.js}"></script>
+<script th:src="@{/static/editormd/lib/raphael.min.js}"></script>
+<script th:src="@{/static/editormd/lib/underscore.min.js}"></script>
+<script th:src="@{/static/editormd/lib/sequence-diagram.min.js}"></script>
+<script th:src="@{/static/editormd/lib/flowchart.min.js}"></script>
+<script th:src="@{/static/editormd/lib/jquery.flowchart.min.js}"></script>
+<script th:src="@{/static/editormd/editormd.js}"></script>
+<script>
+
+    $(function () {
+        editormd("article-content", {
+            width: "100%",
+            height: 400,
+            // syncScrolling: "single",
+            path: "../editormd/lib/",
+            saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
+            // emoji: true,
+            // theme: "dark",//工具栏主题
+            // previewTheme: "dark",//预览主题
+            // editorTheme: "pastel-on-dark",//编辑主题
+            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart: true,             // 开启流程图支持，默认关闭
+            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+            //图片上传
+            // imageUpload: true,
+            // imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            // imageUploadURL: "/settings/imageInText",
+            // onload: function () {
+            //     console.log('onload', this);
+            // },
+            /*指定需要显示的功能按钮*/
+            // toolbarIcons: function () {
+            //     return ["undo", "redo", "|",
+            //         "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+            //         "h1", "h2", "h3", "h4", "h5", "h6", "|",
+            //         "list-ul", "list-ol", "hr", "|",
+            //         "link", "reference-link", "image", "code", "preformatted-text",
+            //         "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+            //         "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|",
+            //         "help", "info"]
+            // },
+        });
+        editormd.markdownToHTML("test-editormd", {
+            htmlDecode      : "style,script,iframe",
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true  // 默认不解析
+        });
+    });
+</script>
+</body>
+</html>

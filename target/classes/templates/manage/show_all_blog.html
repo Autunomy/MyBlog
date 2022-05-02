@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/cdn :: cdn">
+    <meta charset="UTF-8">
+    <title>对所有的博客进行操作</title>
+</head>
+<body>
+<!--导航栏-->
+<nav th:replace="manage/commons/nav :: nav"></nav>
+
+<!--主体-->
+<div class="container">
+    <h2 class="text-center">全部博客</h2>
+    <table class="table table-bordered">
+        <thead style="font-size: x-large">
+            <tr>
+                <th>博客名称</th>
+                <th>分类</th>
+                <th>作者</th>
+                <th>发布日期</th>
+                <th>浏览量</th>
+                <th>点赞量</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody style="font-size: x-large">
+            <tr th:each="blog : ${blogs}">
+                <td><a th:href="@{/blog/showBlog/}+${blog.getBlog_id}" th:text="${blog.getBlog_name()}">java</a></td>
+                <td th:text="${blog.getBlog_tag()}">java</td>
+                <td th:text="${blog.getBlog_author()}">Autunomy</td>
+                <td th:text="${#dates.format(blog.getBlog_date(),'yyyy-MM-dd')}">2022-03-29 12:12:12</td>
+                <td th:text="${blog.getBlog_watch_num()}">999</td>
+                <td th:text="${blog.getBlog_heart_num()}">999</td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/manage/toUpdate/}+${blog.getBlog_id()}">修改博客</a>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a class="btn btn-danger" th:href="@{/manage/deleteBlog/}+${blog.getBlog_id()}">删除博客</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--页面底部信息-->
+<div th:replace="commons/footer :: footer"></div>
+</body>
+</html>

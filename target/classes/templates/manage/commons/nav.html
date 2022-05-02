@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--导航栏-->
+    <nav class="navbar navbar-default" role="navigation" th:fragment="nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!--需要从main请求跳转，因为需要获取最近的5篇博客进行展示-->
+                <a class="navbar-brand" th:href="@{/main}">MyBlog</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/manage/toAddBlog}">添加博文</a></li>
+                    <li><a th:href="@{/manage/showAllBlog}">所有博文</a></li>
+                    <li><a th:href="@{/manage/toAddTag}">添加分类</a></li>
+                    <li><a th:href="@{/manage/showAllTags}">所有分类</a></li>
+                </ul>
+            </div>
+            <!--搜索框-->
+            <form class="navbar-form navbar-right" role="search" method="get" action="">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="请输入你要搜索的博文名称">
+                </div>
+                <button type="submit" class="btn btn-primary">搜索</button>
+            </form>
+        </div>
+    </nav>
+</body>
+</html>

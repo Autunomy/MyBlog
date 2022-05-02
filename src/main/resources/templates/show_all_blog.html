@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="commons/cdn :: cdn">
+    <meta charset="UTF-8">
+    <title>所有博客</title>
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/nav :: nav"></div>
+
+<!--主体-->
+<div class="container">
+    <h2 class="text-center">全部博客</h2>
+    <table class="table table-bordered">
+        <thead style="font-size: x-large">
+            <tr>
+                <th>博客名称</th>
+                <th>作者</th>
+                <th>发布日期</th>
+                <th>浏览量</th>
+                <th>点赞量</th>
+            </tr>
+        </thead>
+        <tbody style="font-size: x-large">
+            <tr>
+                <td><a href="">java</a></td>
+                <td>Autunomy</td>
+                <td>2022-03-29 12:12:12</td>
+                <td>999</td>
+                <td>999</td>
+            </tr>
+            <tr>
+                <td><a href="">c++</a></td>
+                <td>Autunomy</td>
+                <td>2022-03-29 12:12:12</td>
+                <td>999</td>
+                <td>999</td>
+            </tr>
+            <tr>
+                <td><a href="">html</a></td>
+                <td>Autunomy</td>
+                <td>2022-03-29 12:12:12</td>
+                <td>999</td>
+                <td>999</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--页面底部信息-->
+<div th:replace="commons/footer :: footer"></div>
+</body>
+</html>

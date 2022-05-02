@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--引入thymeleaf名称空间-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--导入cdn-->
+<head th:include="commons/cdn :: cdn">
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <!--导航栏-->
+    <div th:replace="commons/nav :: nav"></div>
+
+    <!--主体部分-->
+    <div class="col-md-8 col-md-offset-1">
+        <div th:each="blog : ${blogs}">
+            <div class="row" >
+                <div class="col-md-offset-2">
+                    <h2><a th:href="@{/blog/showBlog/}+${blog.getBlog_id}" th:text="${blog.getBlog_name()}"></a></h2>
+                    <p th:text="${blog.getBlog_content()}"></p>
+                    <br>
+                    <div>
+                        <div style="float: left;">
+                            <span class="glyphicon glyphicon-user"></span>&nbsp;<span th:text="${blog.getBlog_author()}"></span> &nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-time"></span>&nbsp;<span th:text="${#dates.format(blog.getBlog_date(),'yyyy-MM-dd')}"></span>
+                        </div>
+                        <div style="float: right;">
+                            <span class="glyphicon glyphicon-eye-open"></span> <span th:text="${blog.getBlog_watch_num()}"></span>
+                            &nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-star"></span> <span th:text="${blog.getBlog_heart_num()}"></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--侧边栏-->
+    <div class="col-md-3">
+        <!--调整位置进行换行-->
+        <br>
+        <br>
+        <br>
+
+        <!--所有分类-->
+        <table class="table table-bordered">
+            <thead style="background-color: deepskyblue">
+                <tr>
+                    <th>所有分类</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div th:each="tag : ${tags}">
+                    <tr >
+                        <td><a href="" th:text="${tag.getTag_name()}"></a></td>
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+    </div>
+
+    <!--页面底部信息-->
+    <div th:replace="commons/footer :: footer"></div>
+
+</body>
+</html>
