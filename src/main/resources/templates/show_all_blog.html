@@ -22,27 +22,14 @@
             </tr>
         </thead>
         <tbody style="font-size: x-large">
-            <tr>
-                <td><a href="">java</a></td>
-                <td>Autunomy</td>
-                <td>2022-03-29 12:12:12</td>
-                <td>999</td>
-                <td>999</td>
+            <tr th:each="blog : ${blogs}">
+                <td><a th:href="@{/blog/showBlog/}+${blog.getBlog_id}" th:text="${blog.getBlog_name()}">java</a></td>
+                <td th:text="${blog.getBlog_author()}">Autunomy</td>
+                <td th:text="${#dates.format(blog.getBlog_date(),'yyyy-MM-dd')}">2022-03-29 12:12:12</td>
+                <td th:text="${blog.getBlog_watch_num()}">999</td>
+                <td th:text="${blog.getBlog_heart_num()}">999</td>
             </tr>
-            <tr>
-                <td><a href="">c++</a></td>
-                <td>Autunomy</td>
-                <td>2022-03-29 12:12:12</td>
-                <td>999</td>
-                <td>999</td>
-            </tr>
-            <tr>
-                <td><a href="">html</a></td>
-                <td>Autunomy</td>
-                <td>2022-03-29 12:12:12</td>
-                <td>999</td>
-                <td>999</td>
-            </tr>
+
         </tbody>
     </table>
 </div>

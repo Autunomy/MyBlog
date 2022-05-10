@@ -100,4 +100,11 @@ public class BlogController {
         return "redirect:/blog/showBlog/"+blog_id;
     }
 
+    @RequestMapping(value = "/showAllBlog")
+    public String showAllBlog(Model model){
+        List<Blog> blogs = blogService.queryAllBlog();
+        model.addAttribute("blogs",blogs);
+        return "show_all_blog";
+    }
+
 }
