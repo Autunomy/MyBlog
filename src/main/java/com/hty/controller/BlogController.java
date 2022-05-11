@@ -100,11 +100,19 @@ public class BlogController {
         return "redirect:/blog/showBlog/"+blog_id;
     }
 
+    //展示所有的博客信息
     @RequestMapping(value = "/showAllBlog")
     public String showAllBlog(Model model){
         List<Blog> blogs = blogService.queryAllBlog();
         model.addAttribute("blogs",blogs);
         return "show_all_blog";
     }
+
+    //跳转到友情链接页面
+    @RequestMapping(value = "/toFriendHref")
+    public String toFriendHref(){
+        return "friend_href";
+    }
+
 
 }
