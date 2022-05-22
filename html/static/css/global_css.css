@@ -1,0 +1,38 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.box{
+    height: 100px;
+    width: 1200px;
+    margin: 0px auto;
+    background-color: pink;
+}
+
+.nav{
+    margin: 0px auto;
+    background-color: green;
+}
+.nav ul{
+    margin: 0px auto;
+    list-style-type: none;
+}
+
+.nav ul li{
+    height: 50px;
+    width: 100px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: red;
+}
+
+.nav ul li a{
+    display: inline-block;
+    margin: 12px 30px;
+    text-decoration: none;
+    font-size: larger;
+    color: black;
+}
